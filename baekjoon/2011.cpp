@@ -1,7 +1,9 @@
+// PASS
+
 #include <iostream>
 #include <string>
 using namespace std;
-#define c 100000
+#define c 1000000
 
 int lastTwo(int a, int b){
     int d = (a*10)+b;
@@ -28,16 +30,12 @@ int main() {
         p[i] = tmp[i-1] -'0';
     }
 
+    dp[0] = 1;
     dp[1] = (p[1] == 0) ? 0 : 1;
     if (dp[1] == 0) {cout << 0 << '\n'; return 0;}
-    dp[2] = lastTwo(p[1], p[2]) ? 2 : 1;
     
-    int a = 0, b = 0;
-
-    for (int i=3; i<=l; ++i) {   
+    for (int i=2; i<=l; ++i) {   
         dp[i] = ((dp[i-1] * lastOne(p[i])) + (dp[i-2] * lastTwo(p[i-1], p[i])))%c;
-            cout << dp[i] << '\n';
-
     }
 
     cout << dp[l] << '\n';
